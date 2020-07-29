@@ -1,3 +1,8 @@
+// Author: Isaac Choi
+// University of Ottawa
+// SEG 2105 - Final Project
+// Mobile app development - Unit converter on android
+
 package com.example.unitconvertor;
 
 import androidx.appcompat.app.AppCompatActivity;

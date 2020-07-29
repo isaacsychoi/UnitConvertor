@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- // Author: Isaac Choi
+// University of Ottawa
+// SEG 2105 - Final Project
+// Mobile app development - Unit converter on android
+-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
