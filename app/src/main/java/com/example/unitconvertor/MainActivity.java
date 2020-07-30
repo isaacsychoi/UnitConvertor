@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -37,16 +36,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     TextView input_screen, result_screen;
 
     // Spinner
-
     Spinner spinner_measurement, spinner_unit_input, spinner_unit_output;
 
+    // what to measure (mode: pressure, volumetric flow, length, velocity)
+    String processMode = "";
+
+    // boolean value that indicates whether this is
     boolean result_displayed = false;
 
-    // Check list - What to measure?
-    boolean pressure_mode = false;
-    boolean vFlow_mode = false;
-    boolean length_mode= false;
-    boolean velocity_mode = false;
     boolean decimal_input = false;
 
     // Adapters, are used to put arrays in to spinners
@@ -81,33 +78,33 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // mapping the variable to the widgets
 
         // numeric buttons
-        button0 = (Button) findViewById(R.id.btn0);
-        button1 = (Button) findViewById(R.id.btn1);
-        button2 = (Button) findViewById(R.id.btn2);
-        button3 = (Button) findViewById(R.id.btn3);
-        button4 = (Button) findViewById(R.id.btn4);
-        button5 = (Button) findViewById(R.id.btn5);
-        button6 = (Button) findViewById(R.id.btn6);
-        button7 = (Button) findViewById(R.id.btn7);
-        button8 = (Button) findViewById(R.id.btn8);
-        button9 = (Button) findViewById(R.id.btn9);
+        button0 = findViewById(R.id.btn0);
+        button1 = findViewById(R.id.btn1);
+        button2 = findViewById(R.id.btn2);
+        button3 = findViewById(R.id.btn3);
+        button4 = findViewById(R.id.btn4);
+        button5 = findViewById(R.id.btn5);
+        button6 = findViewById(R.id.btn6);
+        button7 = findViewById(R.id.btn7);
+        button8 = findViewById(R.id.btn8);
+        button9 = findViewById(R.id.btn9);
 
         // other buttons
 
-        button_decimal = (Button) findViewById(R.id.btn_decimal);
-        button_deleteOne = (Button) findViewById(R.id.btn_deleteOne);
-        button_run = (Button) findViewById(R.id.btn_run);
-        button_allClear = (Button) findViewById(R.id.btn_allClear);
+        button_decimal = findViewById(R.id.btn_decimal);
+        button_deleteOne = findViewById(R.id.btn_deleteOne);
+        button_run = findViewById(R.id.btn_run);
+        button_allClear = findViewById(R.id.btn_allClear);
 
         // Screens
-        input_screen = (TextView) findViewById(R.id.screen);
-        result_screen = (TextView) findViewById(R.id.resultScreen);
+        input_screen = findViewById(R.id.screen);
+        result_screen = findViewById(R.id.resultScreen);
 
 
         // setup the spinner
-        spinner_measurement = (Spinner) findViewById(R.id.sp_measure_type);
-        spinner_unit_input = (Spinner) findViewById(R.id.sp_input_unit);
-        spinner_unit_output = (Spinner) findViewById(R.id.sp_output_unit);
+        spinner_measurement = findViewById(R.id.sp_measure_type);
+        spinner_unit_input = findViewById(R.id.sp_input_unit);
+        spinner_unit_output = findViewById(R.id.sp_output_unit);
 
         // Set the on click actions
 
@@ -270,8 +267,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     if(removedChar.equals(".")){
                         decimal_input = false;
                     }
-
-
                 }
             }
         });
@@ -308,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         unit_first = spinner_unit_input.getSelectedItem().toString();
                         unit_second = spinner_unit_output.getSelectedItem().toString();
 
-                        if (pressure_mode) {
+                        if (processMode.equals("Pressure")) {
                             if (unit_first.equals(unit_second)) {
                                 cal_result = value;
                                 sec_unit = true;
@@ -337,7 +332,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                     sec_unit = true;
                                 }
                             }
-                        } else if (velocity_mode) {
+                        } else if (processMode.equals("Velocity")) {
                             if (unit_first.equals(unit_second)) {
                                 cal_result = value;
                                 sec_unit = true;
@@ -366,7 +361,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                     sec_unit = true;
                                 }
                             }
-                        } else if (vFlow_mode) {
+                        } else if (processMode.equals("vFlow")) {
                             if (unit_first.equals(unit_second)) {
                                 cal_result = value;
                                 sec_unit = true;
@@ -396,7 +391,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                 }
                             }
 
-                        } else if (length_mode) {
+                        } else if (processMode.equals("Length")) {
                             if (unit_first.equals(unit_second)) {
                                 cal_result = value;
                                 sec_unit = true;
@@ -429,7 +424,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         if (sec_unit) {
                             cal_result = round_dp(cal_result, 8); // round the output to 8 decimal points
                             result_screen.setTextColor(Color.parseColor("#C0C0C0"));
-                            result_screen.setText("= " + String.valueOf(cal_result));
+                            result_screen.setText("= " + cal_result);
                             result_displayed = true;
                         }
                     } // if something is selected in measurement
@@ -454,7 +449,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }// on Create method
 
 
-
     // when changes are made to the drop down list (i.e. the spinners)
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -476,7 +470,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             spinner_unit_output.setOnItemSelectedListener(this);
             input_screen.setText(""); // reset the input screen to avoid confusion
             decimal_input = false;
-            pressure_mode = velocity_mode = length_mode = vFlow_mode = false;
+
+            processMode = "";
         }
         else if (itemSelected.equals("Pressure")){
            unitAdapter = new ArrayAdapter<>(MainActivity.this,
@@ -486,11 +481,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
            spinner_unit_input.setOnItemSelectedListener(this);
            spinner_unit_output.setAdapter(unitAdapter);
            spinner_unit_output.setOnItemSelectedListener(this);
-           if (!pressure_mode){
-               pressure_mode = true;
-               velocity_mode = length_mode = vFlow_mode = false;
+           if (!processMode.equals("Pressure")){
                input_screen.setText(""); // reset the input screen to avoid confusion//
                decimal_input = false;
+               processMode = "Pressure";
            }
         } else if(itemSelected.equals("Velocity")) {
             unitAdapter = new ArrayAdapter<>(MainActivity.this,
@@ -500,11 +494,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             spinner_unit_input.setOnItemSelectedListener(this);
             spinner_unit_output.setAdapter(unitAdapter);
             spinner_unit_output.setOnItemSelectedListener(this);
-            if (!velocity_mode){
-                velocity_mode = true;
-                pressure_mode = length_mode = vFlow_mode = false;
+            if (!processMode.equals("Velocity")){
                 input_screen.setText("");
                 decimal_input = false;
+                processMode = "Velocity";
             }
         } else if (itemSelected.equals("Length")){
             unitAdapter = new ArrayAdapter<>(MainActivity.this,
@@ -514,11 +507,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             spinner_unit_input.setOnItemSelectedListener(this);
             spinner_unit_output.setAdapter(unitAdapter);
             spinner_unit_output.setOnItemSelectedListener(this);
-            if (!length_mode){
-                length_mode = true;
-                pressure_mode =  velocity_mode = vFlow_mode = false;
+            if (!processMode.equals("Length")){
                 input_screen.setText("");
                 decimal_input = false;
+                processMode = "Length";
             }
 
         } else if (itemSelected.equals("Volumetric flow rate")){
@@ -529,11 +521,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             spinner_unit_input.setOnItemSelectedListener(this);
             spinner_unit_output.setAdapter(unitAdapter);
             spinner_unit_output.setOnItemSelectedListener(this);
-            if (!vFlow_mode){
-                vFlow_mode = true;
-                pressure_mode =  velocity_mode = length_mode = false;
+            if (!!this.processMode.equals("vFlow")){
                 input_screen.setText("");
                 decimal_input = false;
+                processMode = "vFlow";
             }
         }
 
@@ -541,18 +532,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-        // does nothing, required to be here (interface method), can add functionality later if necessary
+        // does nothing for now, just an interface method that is required to be here, can add functionality later if necessary
     }
 
 
     // convert a string to a better looking string
-    public double round_dp (double value, int places){
+    private double round_dp (double value, int places){
         BigDecimal bd = BigDecimal.valueOf(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
 
-}
-
-
-
+} // end of class

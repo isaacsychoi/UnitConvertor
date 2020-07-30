@@ -2,20 +2,29 @@
 # Author: Isaac Choi
 
 
-**Background**: Most engineers would need to deal with different unit systems while solving engineering problems, in which they would need to convert values in one unit to another. For example, for purchasing pipes in the U.S. would require knowing the desired length and thickness in imperial units, such as inches and feet. On the other hand, within the metric system, the units used can also be different in different domain, such as blood pressure is measured in mmHg in biological system,  where the pressure in a chemical reactor is evaluated in Pascal (Pa) or kPa while there is a gas-phase reaction.
+*
+**Hereunder shows some examples of expected results**:
 
-In engineering practice, length, flow rate, velocity, pressure, etc. are commonly measured in different devices with different unit systems. The intent of this software, *unit converter*, is to help engineers to convert different measured values to the values in the units that are desired in their workflow in a convenient and handy way. 
+Input | Program Output | Expected Output
+Pressure 100 Pa | 0.75006168 mmHg | 0.750062 mmHg
+Pressure 123456 Pa | 123.456 kPa | 123.456 kPa
+Pressure 50.2 kPa | 376.53096472 mmHg| 376.5309 mmHg
+---------------------|---------------------------|--------------------
+Length 10 m | 393.7 inches | 393.701 inches
+Length 5 m | 16.40416667 ft | 16.4042 ft
+Length 15 inches | 1.25 ft | 1.25 ft
+---------------------|---------------------------|--------------------
+Volumetric flow rate 5 L/min |  8.333E-5 m3/s | 8.333e-5 m3/s
+Volumetric flow rate 7 m3/s |  247.17 ft3/s | 247.20 ft3/s
+Volumetric flow rate 0.3 ft3/s | 509.77060323 L/min | 509.703 L/min
+---------------------|---------------------------|--------------------
+Velocity 5 m/s | 18.0 km/h | 18.0 km/h
+Velocity 60 mi/h | 26.78571429 m/s | 26.8224 m/s
+Velocity 40 mi/h |  64.28571429 km/h | 64.3738 km/h
+---------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-**Requirements** – User Stories:
 
-1.	Convert a pressure value measured in mmHg to Pa
-2.	Convert a pressure value measured in kPa to mmHg
-3.	Convert a velocity value measured in m/s to kg/h
-4.	Convert a velocity value measure in mi/h to m/s
-5.	Convert a flow rate measured in ml/min to m3/s
-6.	Convert a flow rate measured in ft3/s to ml/min
-7.	Convert a length measured in m to inches
-8.	Convert a length measured in feet to m
 
 **Manual testing instruction:**
 
@@ -23,46 +32,45 @@ Disclaimer: Although this app is written in the Java language, the following tes
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Testcase 01:
+**Testcase 01**:
 
 System: Unit Convertor 
 
-Lanuching the app
+*Lanuching the app*
 
 Severity: 1
 
-Instructions:
+**Instructions**:
 
 1.    On Android Studio, press Run
 
-Expected result:
+**Expected result**:
 
 1.   The app loads into the UI. One should observe 3 drop-down lists shown on top of the screen (one in orange, two in green), 2 text boxes in black background (i.e. screen), and numeric keypad (i.e. numpad) with operation buttons located below text boxes. The orange list should display with text: 'Click to select category:'. Shown in the image below. 
 
       [](images_test/AppLayout.png)
 
-
-Cleanup:
+**Cleanup**:
 
 1.   Close the app if not proceeding to test subsequent cases.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Test case 02:
+**Test case 02**:
 
 System: Unit Convertor 
 
-Select item from a drop-down list
+*Select item from a drop-down list*
 
 Severity: 2
 
-Instructions:
+**Instructions**:
 
 1.    If not proceeding from Testcase 01: On Android Studio, press Run (Testcase 01, instruction 1)
 2.    Click on the orange drop-down list
 3.    Select Pressure
 
-Expected result:
+**Expected result**:
 
 1.   The text of the orange drop-down list should change to: 'Pressure'
 2.   Each of the two green drop-down lists should display text: 'Click to select a unit':
@@ -70,29 +78,28 @@ Expected result:
  ![](images_test/TestCase02.png)
                                         
 
-
-Cleanup:
+**Cleanup**:
 
 1.   Close the app if not proceeding to test subsequent cases.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Test case 03:
+**Test case 03**:
 
 System: Unit Convertor 
 
-Select items from different drop-down lists
+*Select items from different drop-down lists*
 
 Severity: 2
 
-Instructions:
+**Instructions**:
 
 1.    If not proceeding from Testcase 02: On Android Studio, press Run (Testcase 02, instruction 1)
 2.    Click on the orange drop-down list and select pressure (Testcase 02. instructions 2 and 3)
 3.    Click on the first green drop-down list and select Pa
 4.    Similarly, click on the second green drop-down list and select kPa
 
-Expected result:
+**Expected result**:
 
 1.   The text of the orange drop-down list should change to: 'Pressure'
 2.   The text of the first green drop-down list should change to: 'Pa'
@@ -100,82 +107,77 @@ Expected result:
 
  ![](images_test/TestCase03.png)
 
-
-Cleanup:
+**Cleanup**:
 
 1.   Close the app if not proceeding to test subsequent cases.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Test case 04:
+**Test case 04**:
 
 System: Unit Convertor 
 
-Test numeric keypad input
+*Test numeric keypad input*
 
 Severity: 2
 
-Instructions:
+**Instructions**:
 
 1.    If not proceeding from Testcase 01: On Android Studio, press Run (Testcase 02, instruction 1)
 2.    Using the numpad button located at the button of the screen, input 100 
 
 
-Expected result:
+**Expected result**:
 
 1.    The first screen should display text: '100' in green colour
 
-
  ![](images_test/TestCase04.png)
 
-Cleanup:
+**Cleanup**:
 
 1.   Close the app if not proceeding to test subsequent cases.
 
 
-
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-Test case 05:
+**Test case 05**:
 
 System: Unit Convertor 
 
-Test run button 
+*Test run button* 
 
 Severity: 2
 
-Instructions:
+**Instructions**:
 
 1.    If not proceeding from Testcase 04: On Android Studio, press Run (Testcase 04, instruction 1)
 2.    Using the numpad button located at the button of the screen, input 100 (Testcase 04, instruction 2)
 3.    Press the purple 'RUN' button located at the bottom left of the screen
 
 
-Expected result:
+**Expected result**:
 
 1.    The first screen should display text: '100' in green colour
 2.    The second screen should display text: 'Please select a category first!'
 
  ![](images_test/TestCase05.png)
 
-Cleanup:
+**Cleanup**:
 
 1.   Close the app if not proceeding to test subsequent cases.
 
 
-
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Test case 06:
+**Test case 06**:
 
 System: Unit Convertor 
 
-Test converting pressure
+*Test converting pressure*
 
 Severity: 3
 
-Instructions:
+**Instructions**:
 
 1.    If not proceeding from Testcase 03: On Android Studio, press Run (Testcase 03, instruction 1)
 2.    Click on the orange drop-down list and select pressure (Testcase 03. instructions 2)
@@ -184,7 +186,7 @@ Instructions:
 5.    Using the numpad to input '100' (Testcase 04, instruction 2)
 6.    Press the purple 'RUN' button located at the bottom left of the screen (Testcase 05, instruction 3)
 
-Expected result:
+**Expected result**:
 
 1.   The text of the orange drop-down list should change to: 'Pressure'
 2.   The text of the first green drop-down list should change to: 'Pa'
@@ -194,22 +196,22 @@ Expected result:
 
  ![](images_test/TestCase06.png)
 
-Cleanup:
+**Cleanup**:
 
 1.   Close the app if not proceeding to test subsequent cases.
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Test case 07:
+**Test case 07**:
 
 System: Unit Convertor 
 
-Test converting length
+*Test converting length*
 
 Severity: 3
 
-Instructions:
+**Instructions**:
 
 1.    If not proceeding from Testcase 03: On Android Studio, press Run (Testcase 03, instruction 1)
 2.    Click on the orange drop-down list and select 'Length' (Testcase 03. instructions 2)
@@ -218,7 +220,7 @@ Instructions:
 5.    Using the numpad to input '1' (Testcase 04, instruction 2)
 6.    Press the purple 'RUN' button located at the bottom left of the screen (Testcase 05, instruction 3)
 
-Expected result:
+**Expected result**:
 
 1.   The text of the orange drop-down list should change to: 'Length'
 2.   The text of the first green drop-down list should change to: 'm'
@@ -228,23 +230,22 @@ Expected result:
 
  ![](images_test/TestCase07.png)
 
-
-Cleanup:
+**Cleanup**:
 
 1.   Close the app if not proceeding to test subsequent cases.
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Test case 08:
+**Test case 08**:
 
 System: Unit Convertor 
 
-Test converting velocity
+*Test converting velocity*
 
 Severity: 3
 
-Instructions:
+**Instructions**:
 
 1.    If not proceeding from Testcase 03: On Android Studio, press Run (Testcase 03, instruction 1)
 2.    Click on the orange drop-down list and select 'Velocity' (Testcase 03. instructions 2)
@@ -253,7 +254,7 @@ Instructions:
 5.    Using the numpad to input '1' (Testcase 04, instruction 2)
 6.    Press the purple 'RUN' button located at the bottom left of the screen (Testcase 05, instruction 3)
 
-Expected result:
+**Expected result**:
 
 1.   The text of the orange drop-down list should change to: 'Velocity'
 2.   The text of the first green drop-down list should change to: 'km/h'
@@ -263,22 +264,22 @@ Expected result:
 
  ![](images_test/TestCase08.png)
 
-Cleanup:
+**Cleanup**:
 
 1.   Close the app if not proceeding to test subsequent cases.
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Test case 09:
+**Test case 09**:
 
 System: Unit Convertor 
 
-Test converting volumetric flow rate
+*Test converting volumetric flow rate*
 
 Severity: 3
 
-Instructions:
+**Instructions**:
 
 1.    If not proceeding from Testcase 03: On Android Studio, press Run (Testcase 03, instruction 1)
 2.    Click on the orange drop-down list and select 'Volumetric flow rate' (Testcase 03. instructions 2)
@@ -287,7 +288,7 @@ Instructions:
 5.    Using the numpad to input '1' (Testcase 04, instruction 2)
 6.    Press the purple 'RUN' button located at the bottom left of the screen (Testcase 05, instruction 3)
 
-Expected result:
+**Expected result**:
 
 1.   The text of the orange drop-down list should change to: 'Volumetric flow rate'
 2.   The text of the first green drop-down list should change to: 'm3/s'
@@ -297,11 +298,48 @@ Expected result:
 
  ![](images_test/TestCase09.png)
 
-Cleanup:
+**Cleanup**:
 
 1.   Close the app if not proceeding to test subsequent cases.
 
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**Software architecture**:
+
+* Client-server
+* General hierachy
+
+**Future development of this software**
+
+* Include more measurement units in existing category (e.g. bar, Torr, Ba for pressure)
+* Include more measurement categories (e.g. viscosity, density, force, momentum, etc.)
+
+**About modifiying this software**:
+
+* Modify this element in each drop-down list in the default strings module  
+* Identify the conversion constants for new categories/units that is newly implemented to the system
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
