@@ -21,28 +21,28 @@
 
 
     <string-array name="pressure_units">
-        <item>Click to select unit:</item>
+        <item>Click to select a unit:</item>
         <item>Pa</item>
         <item>kPa</item>
         <item>mmHg</item>
     </string-array>
 
     <string-array name="length_units">
-        <item>Click to select unit:</item>
+        <item>Click to select a unit:</item>
         <item>m</item>
         <item>inch</item>
         <item>foot</item>
     </string-array>
 
     <string-array name="velocity_units">
-        <item>Click to select unit:</item>
+        <item>Click to select a unit:</item>
         <item>m/s</item>
         <item>km/h</item>
         <item>mi/h</item>
     </string-array>
 
     <string-array name="v_flow_units">
-        <item>Click to select unit:</item>
+        <item>Click to select a unit:</item>
         <item>m3/s</item>
         <item>ft3/s</item>
         <item>L/min</item>

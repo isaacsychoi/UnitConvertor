@@ -56,6 +56,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     // calculation result
     double cal_result = 0;
 
+    // Conversion constant: Pressure
+    public final double KPA_TO_PA = 1000.0;
+    public final double MMHG_TO_KPA = 101.325/760.0;
+
+    // Conversion constant: velocity or speed
+    public final double MPS_TO_KMH= 3.6;
+    public final double MPS_TO_MIH = 2.24;
+
+    // Conversion constant: length
+    public final double M_To_IN = 39.37;
+    public final double FT_TO_IN = 12.0;
+
+    // Conversion constant: flow rate
+    public final double M3S_TO_FT3S = 35.31;
+    public final double M3S_TO_LMIN = 60000.0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -283,21 +300,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             cal_result = value;
                         } else if (unit_first.equals("Pa")){
                             if (unit_second.equals("kPa")){
-                                cal_result = value * pa_to_kpa();
+                                cal_result = value * KPA_TO_PA;
                             } else if (unit_second.equals("mmHg")){
-                                cal_result = value * pa_to_mmhg();
+                                cal_result = value / (MMHG_TO_KPA * KPA_TO_PA);
                             }
                         } else if (unit_first.equals("kPa")){
                             if (unit_second.equals("Pa")){
-                                cal_result = value / pa_to_kpa();
+                                cal_result = value / KPA_TO_PA;
                             } else if (unit_second.equals("mmHg")){
-                                cal_result = value * kpa_to_mmhg();
+                                cal_result = value / MMHG_TO_KPA;
                             }
                         } else if (unit_first.equals("mmHg")) {
                             if (unit_second.equals("Pa")) {
-                                cal_result = value / pa_to_mmhg();
+                                cal_result = value * MMHG_TO_KPA * KPA_TO_PA;
                             } else if (unit_second.equals("kPa")) {
-                                cal_result = value / kpa_to_mmhg();
+                                cal_result = value * MMHG_TO_KPA;
                             }
                         }
                     } else if (velocity_mode){
@@ -305,21 +322,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             cal_result = value;
                         } else if (unit_first.equals("m/s")){
                             if (unit_second.equals("km/h")){
-                                cal_result = value *  mps_to_kmh();
+                                cal_result = value *  MPS_TO_KMH;
                             } else if (unit_second.equals("mi/h")){
-                                cal_result = value * mps_to_mih();
+                                cal_result = value * MPS_TO_MIH;
                             }
                         } else if (unit_first.equals("km/h")){
                             if (unit_second.equals("m/s")){
-                                cal_result = value/mps_to_kmh();
+                                cal_result = value/MPS_TO_KMH;
                             } else if (unit_second.equals("mi/h")){
-                                cal_result = value  * kmh_to_mih();
+                                cal_result = value  * MPS_TO_MIH/MPS_TO_KMH;
                             }
                         } else if (unit_first.equals("mi/h")) {
                             if (unit_second.equals("km/h")) {
-                                cal_result = value / kmh_to_mih();
+                                cal_result = value / (MPS_TO_MIH/MPS_TO_KMH);
                             } else if (unit_second.equals("m/s")) {
-                                cal_result = value / mps_to_mih();
+                                cal_result = value / MPS_TO_MIH;
                             }
                         }
                     } else if (vFlow_mode){
@@ -327,21 +344,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             cal_result = value;
                         } else if (unit_first.equals("m3/s")){
                             if (unit_second.equals("L/min")){
-                                cal_result = value * m3s_to_Lmin();
+                                cal_result = value * M3S_TO_LMIN;
                             } else if (unit_second.equals("ft3/s")){
-                                cal_result = value * m3s_to_ft3s();
+                                cal_result = value * M3S_TO_FT3S;
                             }
                         } else if (unit_first.equals("L/min")){
                             if (unit_second.equals("m3/s")){
-                                cal_result = value/m3s_to_Lmin();
+                                cal_result = value/M3S_TO_LMIN;
                             } else if (unit_second.equals("ft3/s")){
-                                cal_result = value/ft3s_to_Lmin();
+                                cal_result = value * M3S_TO_FT3S/M3S_TO_LMIN;
                             }
                         } else if (unit_first.equals("ft3/s")) {
                             if (unit_second.equals("m3/s")) {
-                                cal_result = value / m3s_to_ft3s();
+                                cal_result = value / M3S_TO_FT3S;
                             } else if (unit_second.equals("L/min")) {
-                                cal_result = value * ft3s_to_Lmin();
+                                cal_result = value / M3S_TO_FT3S * M3S_TO_LMIN;
                             }
                         }
 
@@ -350,21 +367,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             cal_result = value;
                         } else if (unit_first.equals("m")){
                             if (unit_second.equals("inch")){
-                                cal_result = value * m_to_in();
+                                cal_result = value * M_To_IN;
                             } else if (unit_second.equals("foot")){
-                                cal_result = value * m_to_ft();
+                                cal_result = value * M_To_IN/FT_TO_IN;
                             }
                         } else if (unit_first.equals("inch")){
                             if (unit_second.equals("m")){
-                                cal_result = value/m_to_in();
+                                cal_result = value/ M_To_IN;
                             } else if (unit_second.equals("foot")){
-                                cal_result = value * in_to_ft();
+                                cal_result = value / FT_TO_IN;
                             }
                         } else if (unit_first.equals("foot")) {
                             if (unit_second.equals("m")) {
-                                cal_result = value /m_to_ft();
+                                cal_result = value *FT_TO_IN/M_To_IN;
                             } else if (unit_second.equals("inch")) {
-                                cal_result = value/in_to_ft();
+                                cal_result = value * FT_TO_IN;
                             }
                         }
                     }
@@ -404,7 +421,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         result_screen.setText("");
         result_displayed = false;
 
-        if (itemSelected.equals("Click to select category:")){
+        if (itemSelected.equals("Click to select a category:")){
             unitAdapter = new ArrayAdapter<>(MainActivity.this,
                     android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.nothing));
             unitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -474,63 +491,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         BigDecimal bd = BigDecimal.valueOf(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
-    }
-
-
-    // Pressure conversion methods
-    private double pa_to_kpa(){
-        return 1/1000.0;
-    }
-
-    private double pa_to_mmhg(){
-        return 760.0/101325.0;
-    }
-
-    private double kpa_to_mmhg (){
-        return 760.0/101.325;
-    }
-
-
-    // Velocity conversion methods
-
-    private double mps_to_kmh (){
-        return 3.6;
-    }
-
-    private double mps_to_mih (){
-        return 2.24;
-    }
-
-    private double kmh_to_mih (){
-        return mps_to_mih()/mps_to_kmh();
-    }
-
-    // Length conversion methods
-
-    private double m_to_in (){
-        return 39.37;
-    }
-
-    private double in_to_ft (){
-        return 1.0/12.0;
-    }
-
-    private double m_to_ft (){
-        return in_to_ft() * m_to_in();
-    }
-
-    // Volumetric flow rate methods
-
-    private double m3s_to_ft3s(){
-        return Math.pow(m_to_ft(),3);
-    }
-
-    private double m3s_to_Lmin (){
-        return 1000*60;
-    }
-
-    private double ft3s_to_Lmin (){
-        return m3s_to_Lmin()/m3s_to_ft3s();
     }
 
 }
