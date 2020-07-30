@@ -521,7 +521,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             spinner_unit_input.setOnItemSelectedListener(this);
             spinner_unit_output.setAdapter(unitAdapter);
             spinner_unit_output.setOnItemSelectedListener(this);
-            if (!!this.processMode.equals("vFlow")){
+            if (!this.processMode.equals("vFlow")){
                 input_screen.setText("");
                 decimal_input = false;
                 processMode = "vFlow";
