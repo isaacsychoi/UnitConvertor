@@ -7,7 +7,7 @@
     <string name="app_name">Unit Convertor</string>
 
     <string-array name="measurement">
-        <item>Click to select category:</item>
+        <item>Click to select a category:</item>
         <item>Pressure</item>
         <item>Length</item>
         <item>Velocity</item>

@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ArrayAdapter<String> unitAdapter;
 
     // calculation result
-    double cal_result = 0;
+    double cal_result = 0.0;
 
     // Conversion constant: Pressure
     public final double KPA_TO_PA = 1000.0;
@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onClick(View v) {
                 if (result_displayed){
                     input_screen.setText("");
+                    decimal_input = false;
                     result_displayed = false;
                     result_screen.setTextColor(Color.GRAY);
                 }
@@ -129,8 +130,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (result_displayed){
                     input_screen.setText("");
                     result_displayed = false;
+                    decimal_input = false;
+                    result_screen.setTextColor(Color.GRAY);
                 }
-                result_screen.setTextColor(Color.GRAY);
+
 
                 input_screen.setText(input_screen.getText() + "1");
             }
@@ -141,9 +144,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (result_displayed){
                     input_screen.setText("");
                     result_displayed = false;
+                    decimal_input = false;
+                    result_screen.setTextColor(Color.GRAY);
                 }
-                result_screen.setTextColor(Color.GRAY);
-
                 input_screen.setText(input_screen.getText() + "2");
             }
         });
@@ -153,8 +156,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (result_displayed){
                     input_screen.setText("");
                     result_displayed = false;
+                    decimal_input = false;
+                    result_screen.setTextColor(Color.GRAY);
                 }
-                result_screen.setTextColor(Color.GRAY);
 
                 input_screen.setText(input_screen.getText() + "3");
             }
@@ -165,8 +169,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (result_displayed){
                     input_screen.setText("");
                     result_displayed = false;
+                    decimal_input = false;
+                    result_screen.setTextColor(Color.GRAY);
                 }
-                result_screen.setTextColor(Color.GRAY);
 
                 input_screen.setText(input_screen.getText() + "4");
             }
@@ -177,8 +182,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (result_displayed){
                     input_screen.setText("");
                     result_displayed = false;
+                    decimal_input = false;
+                    result_screen.setTextColor(Color.GRAY);
                 }
-                result_screen.setTextColor(Color.GRAY);
                 input_screen.setText(input_screen.getText() + "5");
             }
         });
@@ -188,8 +194,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (result_displayed){
                     input_screen.setText("");
                     result_displayed = false;
+                    decimal_input = false;
+                    result_screen.setTextColor(Color.GRAY);
                 }
-                result_screen.setTextColor(Color.GRAY);
 
                 input_screen.setText(input_screen.getText() + "6");
             }
@@ -200,8 +207,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (result_displayed){
                     input_screen.setText("");
                     result_displayed = false;
+                    decimal_input = false;
+                    result_screen.setTextColor(Color.GRAY);
                 }
-                result_screen.setTextColor(Color.GRAY);
                 input_screen.setText(input_screen.getText() + "7");
             }
         });
@@ -211,8 +219,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (result_displayed){
                     input_screen.setText("");
                     result_displayed = false;
+                    decimal_input = false;
+                    result_screen.setTextColor(Color.GRAY);
                 }
-                result_screen.setTextColor(Color.GRAY);
 
                 input_screen.setText(input_screen.getText() + "8");
             }
@@ -223,8 +232,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (result_displayed){
                     input_screen.setText("");
                     result_displayed = false;
+                    decimal_input = false;
+                    result_screen.setTextColor(Color.GRAY);
                 }
-                result_screen.setTextColor(Color.GRAY);
 
                 input_screen.setText(input_screen.getText() + "9");
             }
@@ -288,111 +298,146 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 String user_inputs = input_screen.getText().toString();
                 String unit_first;
                 String unit_second;
+                boolean sec_unit = false;
                 if (user_inputs.length() != 0) {
 
                     // process the inputs
-                    unit_first = spinner_unit_input.getSelectedItem().toString();
-                    unit_second = spinner_unit_output.getSelectedItem().toString();
+
                     double value = Double.parseDouble(user_inputs);
+                    if (!spinner_measurement.getSelectedItem().toString().equals("Click to select a category:")) {
+                        unit_first = spinner_unit_input.getSelectedItem().toString();
+                        unit_second = spinner_unit_output.getSelectedItem().toString();
 
-                    if (pressure_mode){
-                        if (unit_first.equals(unit_second)){
-                            cal_result = value;
-                        } else if (unit_first.equals("Pa")){
-                            if (unit_second.equals("kPa")){
-                                cal_result = value * KPA_TO_PA;
-                            } else if (unit_second.equals("mmHg")){
-                                cal_result = value / (MMHG_TO_KPA * KPA_TO_PA);
+                        if (pressure_mode) {
+                            if (unit_first.equals(unit_second)) {
+                                cal_result = value;
+                                sec_unit = true;
+                            } else if (unit_first.equals("Pa")) {
+                                if (unit_second.equals("kPa")) {
+                                    cal_result = value / KPA_TO_PA;
+                                    sec_unit = true;
+                                } else if (unit_second.equals("mmHg")) {
+                                    cal_result = value / (MMHG_TO_KPA * KPA_TO_PA);
+                                    sec_unit = true;
+                                }
+                            } else if (unit_first.equals("kPa")) {
+                                if (unit_second.equals("Pa")) {
+                                    cal_result = value / KPA_TO_PA;
+                                    sec_unit = true;
+                                } else if (unit_second.equals("mmHg")) {
+                                    cal_result = value / MMHG_TO_KPA;
+                                    sec_unit = true;
+                                }
+                            } else if (unit_first.equals("mmHg")) {
+                                if (unit_second.equals("Pa")) {
+                                    cal_result = value * MMHG_TO_KPA * KPA_TO_PA;
+                                    sec_unit = true;
+                                } else if (unit_second.equals("kPa")) {
+                                    cal_result = value * MMHG_TO_KPA;
+                                    sec_unit = true;
+                                }
                             }
-                        } else if (unit_first.equals("kPa")){
-                            if (unit_second.equals("Pa")){
-                                cal_result = value / KPA_TO_PA;
-                            } else if (unit_second.equals("mmHg")){
-                                cal_result = value / MMHG_TO_KPA;
+                        } else if (velocity_mode) {
+                            if (unit_first.equals(unit_second)) {
+                                cal_result = value;
+                                sec_unit = true;
+                            } else if (unit_first.equals("m/s")) {
+                                if (unit_second.equals("km/h")) {
+                                    cal_result = value * MPS_TO_KMH;
+                                    sec_unit = true;
+                                } else if (unit_second.equals("mi/h")) {
+                                    cal_result = value * MPS_TO_MIH;
+                                    sec_unit = true;
+                                }
+                            } else if (unit_first.equals("km/h")) {
+                                if (unit_second.equals("m/s")) {
+                                    cal_result = value / MPS_TO_KMH;
+                                    sec_unit = true;
+                                } else if (unit_second.equals("mi/h")) {
+                                    cal_result = value * MPS_TO_MIH / MPS_TO_KMH;
+                                    sec_unit = true;
+                                }
+                            } else if (unit_first.equals("mi/h")) {
+                                if (unit_second.equals("km/h")) {
+                                    cal_result = value / (MPS_TO_MIH / MPS_TO_KMH);
+                                    sec_unit = true;
+                                } else if (unit_second.equals("m/s")) {
+                                    cal_result = value / MPS_TO_MIH;
+                                    sec_unit = true;
+                                }
                             }
-                        } else if (unit_first.equals("mmHg")) {
-                            if (unit_second.equals("Pa")) {
-                                cal_result = value * MMHG_TO_KPA * KPA_TO_PA;
-                            } else if (unit_second.equals("kPa")) {
-                                cal_result = value * MMHG_TO_KPA;
+                        } else if (vFlow_mode) {
+                            if (unit_first.equals(unit_second)) {
+                                cal_result = value;
+                                sec_unit = true;
+                            } else if (unit_first.equals("m3/s")) {
+                                if (unit_second.equals("L/min")) {
+                                    cal_result = value * M3S_TO_LMIN;
+                                    sec_unit = true;
+                                } else if (unit_second.equals("ft3/s")) {
+                                    cal_result = value * M3S_TO_FT3S;
+                                    sec_unit = true;
+                                }
+                            } else if (unit_first.equals("L/min")) {
+                                if (unit_second.equals("m3/s")) {
+                                    cal_result = value / M3S_TO_LMIN;
+                                    sec_unit = true;
+                                } else if (unit_second.equals("ft3/s")) {
+                                    cal_result = value * M3S_TO_FT3S / M3S_TO_LMIN;
+                                    sec_unit = true;
+                                }
+                            } else if (unit_first.equals("ft3/s")) {
+                                if (unit_second.equals("m3/s")) {
+                                    cal_result = value / M3S_TO_FT3S;
+                                    sec_unit = true;
+                                } else if (unit_second.equals("L/min")) {
+                                    cal_result = value / M3S_TO_FT3S * M3S_TO_LMIN;
+                                    sec_unit = true;
+                                }
                             }
-                        }
-                    } else if (velocity_mode){
-                        if (unit_first.equals(unit_second)){
-                            cal_result = value;
-                        } else if (unit_first.equals("m/s")){
-                            if (unit_second.equals("km/h")){
-                                cal_result = value *  MPS_TO_KMH;
-                            } else if (unit_second.equals("mi/h")){
-                                cal_result = value * MPS_TO_MIH;
-                            }
-                        } else if (unit_first.equals("km/h")){
-                            if (unit_second.equals("m/s")){
-                                cal_result = value/MPS_TO_KMH;
-                            } else if (unit_second.equals("mi/h")){
-                                cal_result = value  * MPS_TO_MIH/MPS_TO_KMH;
-                            }
-                        } else if (unit_first.equals("mi/h")) {
-                            if (unit_second.equals("km/h")) {
-                                cal_result = value / (MPS_TO_MIH/MPS_TO_KMH);
-                            } else if (unit_second.equals("m/s")) {
-                                cal_result = value / MPS_TO_MIH;
-                            }
-                        }
-                    } else if (vFlow_mode){
-                        if (unit_first.equals(unit_second)){
-                            cal_result = value;
-                        } else if (unit_first.equals("m3/s")){
-                            if (unit_second.equals("L/min")){
-                                cal_result = value * M3S_TO_LMIN;
-                            } else if (unit_second.equals("ft3/s")){
-                                cal_result = value * M3S_TO_FT3S;
-                            }
-                        } else if (unit_first.equals("L/min")){
-                            if (unit_second.equals("m3/s")){
-                                cal_result = value/M3S_TO_LMIN;
-                            } else if (unit_second.equals("ft3/s")){
-                                cal_result = value * M3S_TO_FT3S/M3S_TO_LMIN;
-                            }
-                        } else if (unit_first.equals("ft3/s")) {
-                            if (unit_second.equals("m3/s")) {
-                                cal_result = value / M3S_TO_FT3S;
-                            } else if (unit_second.equals("L/min")) {
-                                cal_result = value / M3S_TO_FT3S * M3S_TO_LMIN;
-                            }
-                        }
 
-                    } else if (length_mode){
-                        if (unit_first.equals(unit_second)){
-                            cal_result = value;
-                        } else if (unit_first.equals("m")){
-                            if (unit_second.equals("inch")){
-                                cal_result = value * M_To_IN;
-                            } else if (unit_second.equals("foot")){
-                                cal_result = value * M_To_IN/FT_TO_IN;
-                            }
-                        } else if (unit_first.equals("inch")){
-                            if (unit_second.equals("m")){
-                                cal_result = value/ M_To_IN;
-                            } else if (unit_second.equals("foot")){
-                                cal_result = value / FT_TO_IN;
-                            }
-                        } else if (unit_first.equals("foot")) {
-                            if (unit_second.equals("m")) {
-                                cal_result = value *FT_TO_IN/M_To_IN;
-                            } else if (unit_second.equals("inch")) {
-                                cal_result = value * FT_TO_IN;
+                        } else if (length_mode) {
+                            if (unit_first.equals(unit_second)) {
+                                cal_result = value;
+                                sec_unit = true;
+                            } else if (unit_first.equals("m")) {
+                                if (unit_second.equals("inch")) {
+                                    cal_result = value * M_To_IN;
+                                    sec_unit = true;
+                                } else if (unit_second.equals("foot")) {
+                                    cal_result = value * M_To_IN / FT_TO_IN;
+                                    sec_unit = true;
+                                }
+                            } else if (unit_first.equals("inch")) {
+                                if (unit_second.equals("m")) {
+                                    cal_result = value / M_To_IN;
+                                    sec_unit = true;
+                                } else if (unit_second.equals("foot")) {
+                                    cal_result = value / FT_TO_IN;
+                                    sec_unit = true;
+                                }
+                            } else if (unit_first.equals("foot")) {
+                                if (unit_second.equals("m")) {
+                                    cal_result = value * FT_TO_IN / M_To_IN;
+                                    sec_unit = true;
+                                } else if (unit_second.equals("inch")) {
+                                    cal_result = value * FT_TO_IN;
+                                    sec_unit = true;
+                                }
                             }
                         }
+                        if (sec_unit) {
+                            cal_result = round_dp(cal_result, 8); // round the output to 8 decimal points
+                            result_screen.setTextColor(Color.parseColor("#C0C0C0"));
+                            result_screen.setText("= " + String.valueOf(cal_result));
+                            result_displayed = true;
+                        }
+                    } // if something is selected in measurement
+                    else{
+                        result_screen.setTextColor(Color.parseColor("#C0C0C0"));
+                        result_screen.setText("Please select a category first !");
+                        result_displayed = true;
                     }
-
-
-                    cal_result = round_dp(cal_result, 12); // round the output to 12 decimal points
-
-                    // set the result on the screen
-                    result_screen.setTextColor(Color.parseColor("#C0C0C0"));
-                    result_screen.setText("= " + String.valueOf(cal_result));
-                    result_displayed = true;
                 }
             }
         });
@@ -430,6 +475,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             spinner_unit_output.setAdapter(unitAdapter);
             spinner_unit_output.setOnItemSelectedListener(this);
             input_screen.setText(""); // reset the input screen to avoid confusion
+            decimal_input = false;
             pressure_mode = velocity_mode = length_mode = vFlow_mode = false;
         }
         else if (itemSelected.equals("Pressure")){
@@ -440,9 +486,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
            spinner_unit_input.setOnItemSelectedListener(this);
            spinner_unit_output.setAdapter(unitAdapter);
            spinner_unit_output.setOnItemSelectedListener(this);
-           pressure_mode = true;
-           velocity_mode = length_mode = vFlow_mode = false;
-           input_screen.setText(""); // reset the input screen to avoid confusion
+           if (!pressure_mode){
+               pressure_mode = true;
+               velocity_mode = length_mode = vFlow_mode = false;
+               input_screen.setText(""); // reset the input screen to avoid confusion//
+               decimal_input = false;
+           }
         } else if(itemSelected.equals("Velocity")) {
             unitAdapter = new ArrayAdapter<>(MainActivity.this,
                     android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.velocity_units));
@@ -451,9 +500,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             spinner_unit_input.setOnItemSelectedListener(this);
             spinner_unit_output.setAdapter(unitAdapter);
             spinner_unit_output.setOnItemSelectedListener(this);
-            velocity_mode = true;
-            pressure_mode = length_mode = vFlow_mode = false;
-            input_screen.setText("");
+            if (!velocity_mode){
+                velocity_mode = true;
+                pressure_mode = length_mode = vFlow_mode = false;
+                input_screen.setText("");
+                decimal_input = false;
+            }
         } else if (itemSelected.equals("Length")){
             unitAdapter = new ArrayAdapter<>(MainActivity.this,
                     android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.length_units));
@@ -462,9 +514,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             spinner_unit_input.setOnItemSelectedListener(this);
             spinner_unit_output.setAdapter(unitAdapter);
             spinner_unit_output.setOnItemSelectedListener(this);
-            length_mode = true;
-            pressure_mode =  velocity_mode = vFlow_mode = false;
-            input_screen.setText("");
+            if (!length_mode){
+                length_mode = true;
+                pressure_mode =  velocity_mode = vFlow_mode = false;
+                input_screen.setText("");
+                decimal_input = false;
+            }
+
         } else if (itemSelected.equals("Volumetric flow rate")){
             unitAdapter = new ArrayAdapter<>(MainActivity.this,
                     android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.v_flow_units));
@@ -473,9 +529,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             spinner_unit_input.setOnItemSelectedListener(this);
             spinner_unit_output.setAdapter(unitAdapter);
             spinner_unit_output.setOnItemSelectedListener(this);
-            vFlow_mode = true;
-            pressure_mode =  velocity_mode = length_mode = false;
-            input_screen.setText("");
+            if (!vFlow_mode){
+                vFlow_mode = true;
+                pressure_mode =  velocity_mode = length_mode = false;
+                input_screen.setText("");
+                decimal_input = false;
+            }
         }
 
     } // onItemSelected method
