@@ -7,6 +7,7 @@
     <string name="app_name">Unit Convertor</string>
 
     <string-array name="measurement">
+        <item>Click to select category:</item>
         <item>Pressure</item>
         <item>Length</item>
         <item>Velocity</item>
@@ -14,25 +15,34 @@
     </string-array>
 
 
+    <string-array name="nothing">
+        <item>Please first select a category</item>
+    </string-array>
+
+
     <string-array name="pressure_units">
+        <item>Click to select unit:</item>
         <item>Pa</item>
         <item>kPa</item>
         <item>mmHg</item>
     </string-array>
 
     <string-array name="length_units">
+        <item>Click to select unit:</item>
         <item>m</item>
         <item>inch</item>
         <item>foot</item>
     </string-array>
 
     <string-array name="velocity_units">
+        <item>Click to select unit:</item>
         <item>m/s</item>
         <item>km/h</item>
         <item>mi/h</item>
     </string-array>
 
     <string-array name="v_flow_units">
+        <item>Click to select unit:</item>
         <item>m3/s</item>
         <item>ft3/s</item>
         <item>L/min</item>
