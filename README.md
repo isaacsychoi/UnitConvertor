@@ -2,30 +2,6 @@
 # Author: Isaac Choi
 
 
-*
-**Hereunder shows some examples of expected results**:
-
-Input | Program Output | Expected Output
-Pressure 100 Pa | 0.75006168 mmHg | 0.750062 mmHg
-Pressure 123456 Pa | 123.456 kPa | 123.456 kPa
-Pressure 50.2 kPa | 376.53096472 mmHg| 376.5309 mmHg
----------------------|---------------------------|--------------------
-Length 10 m | 393.7 inches | 393.701 inches
-Length 5 m | 16.40416667 ft | 16.4042 ft
-Length 15 inches | 1.25 ft | 1.25 ft
----------------------|---------------------------|--------------------
-Volumetric flow rate 5 L/min |  8.333E-5 m3/s | 8.333e-5 m3/s
-Volumetric flow rate 7 m3/s |  247.17 ft3/s | 247.20 ft3/s
-Volumetric flow rate 0.3 ft3/s | 509.77060323 L/min | 509.703 L/min
----------------------|---------------------------|--------------------
-Velocity 5 m/s | 18.0 km/h | 18.0 km/h
-Velocity 60 mi/h | 26.78571429 m/s | 26.8224 m/s
-Velocity 40 mi/h |  64.28571429 km/h | 64.3738 km/h
----------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
 **Manual testing instruction:**
 
 Disclaimer: Although this app is written in the Java language, the following test cases are only for running it on an Android device or an Android emulator (e.g. the one built-in Android Studio). The expected results that will be presented in this section are the results tested using an Android emulator. 
