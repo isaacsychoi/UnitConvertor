@@ -24,8 +24,11 @@ Disclaimer: Although this app is written in the Java language, the following tes
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Testcase 01:
+
 System: Unit Convertor 
+
 Lanuching the app
+
 Severity: 1
 
 Instructions:
@@ -46,8 +49,11 @@ Cleanup:
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Test case 02:
+
 System: Unit Convertor 
+
 Select item from a drop-down list
+
 Severity: 2
 
 Instructions:
@@ -61,8 +67,8 @@ Expected result:
 1.   The text of the orange drop-down list should change to: 'Pressure'
 2.   Each of the two green drop-down lists should display text: 'Click to select a unit':
 
- [](images_test/TestCase02.png)
-
+ ![](images_test/TestCase02.png)
+                                        
 
 
 Cleanup:
@@ -72,8 +78,11 @@ Cleanup:
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Test case 03:
+
 System: Unit Convertor 
+
 Select items from different drop-down lists
+
 Severity: 2
 
 Instructions:
@@ -89,7 +98,7 @@ Expected result:
 2.   The text of the first green drop-down list should change to: 'Pa'
 3.   The text of the second green drop-down list should change to: 'kPa'
 
- [](images_test/TestCase03.png)
+ ![](images_test/TestCase03.png)
 
 
 Cleanup:
@@ -99,8 +108,11 @@ Cleanup:
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Test case 04:
+
 System: Unit Convertor 
+
 Test numeric keypad input
+
 Severity: 2
 
 Instructions:
@@ -114,7 +126,7 @@ Expected result:
 1.    The first screen should display text: '100' in green colour
 
 
- [](images_test/TestCase04.png)
+ ![](images_test/TestCase04.png)
 
 Cleanup:
 
@@ -126,8 +138,11 @@ Cleanup:
 
 
 Test case 05:
+
 System: Unit Convertor 
+
 Test run button 
+
 Severity: 2
 
 Instructions:
@@ -142,6 +157,8 @@ Expected result:
 1.    The first screen should display text: '100' in green colour
 2.    The second screen should display text: 'Please select a category first!'
 
+ ![](images_test/TestCase05.png)
+
 Cleanup:
 
 1.   Close the app if not proceeding to test subsequent cases.
@@ -151,8 +168,11 @@ Cleanup:
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Test case 06:
+
 System: Unit Convertor 
+
 Test converting pressure
+
 Severity: 3
 
 Instructions:
@@ -172,6 +192,8 @@ Expected result:
 4.   The first screen should display text: '100' in green colour
 5.   The second screen should display text: '0.1' in grey colour
 
+ ![](images_test/TestCase06.png)
+
 Cleanup:
 
 1.   Close the app if not proceeding to test subsequent cases.
@@ -180,8 +202,11 @@ Cleanup:
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Test case 07:
+
 System: Unit Convertor 
+
 Test converting length
+
 Severity: 3
 
 Instructions:
@@ -201,6 +226,9 @@ Expected result:
 4.   The first screen should display text: '1' in green colour
 5.   The second screen should display text: '39.37' in grey colour
 
+ ![](images_test/TestCase07.png)
+
+
 Cleanup:
 
 1.   Close the app if not proceeding to test subsequent cases.
@@ -209,8 +237,11 @@ Cleanup:
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Test case 08:
+
 System: Unit Convertor 
+
 Test converting velocity
+
 Severity: 3
 
 Instructions:
@@ -230,6 +261,8 @@ Expected result:
 4.   The first screen should display text: '5' in green colour
 5.   The second screen should display text: '1.38888889' in grey colour
 
+ ![](images_test/TestCase08.png)
+
 Cleanup:
 
 1.   Close the app if not proceeding to test subsequent cases.
@@ -238,8 +271,11 @@ Cleanup:
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Test case 09:
+
 System: Unit Convertor 
+
 Test converting volumetric flow rate
+
 Severity: 3
 
 Instructions:
@@ -258,6 +294,8 @@ Expected result:
 3.   The text of the second green drop-down list should change to: 'L/min'
 4.   The first screen should display text: '0.5' in green colour
 5.   The second screen should display text: '30000.0' in grey colour
+
+ ![](images_test/TestCase09.png)
 
 Cleanup:
 
