@@ -24,7 +24,7 @@ Severity: 1
 
 1.   The app loads into the UI. One should observe 3 drop-down lists shown on top of the screen (one in orange, two in green), 2 text boxes in black background (i.e. screen), and numeric keypad (i.e. numpad) with operation buttons located below text boxes. The orange list should display with text: 'Click to select category:'. Shown in the image below. 
 
-      [](images_test/AppLayout.png)
+      ![](images_test/AppLayout.png)
 
 **Cleanup**:
 
